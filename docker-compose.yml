@@ -1,0 +1,27 @@
+---
+version: '3'
+services:
+  osticket:
+    image: osticket
+    user: root
+    ports:
+      - 8880:80
+      - 8343:443
+    volumes:
+      - ./ost-config.php:/var/www/html/include/ost-config.php
+    restart: unless-stopped
+    links:
+      - "db:database"
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: osticket
+      MARIADB_DATABASE : 'osticket'
+      MARIADB_USER : 'osticket'
+      MYSQL_PASSWORD: 'osticket'
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: unless-stopped
