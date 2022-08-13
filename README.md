@@ -23,7 +23,7 @@ It is recommended that you run this container using docker-compose so you can ge
 version: '3'
 services:
   osticket:
-    image: osticket
+    image: comprofix/osticket:latest
     user: root
     ports:
       - 8880:80
