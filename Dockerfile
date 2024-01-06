@@ -13,7 +13,7 @@ RUN apt-get install unzip curl vim mariadb-client php8.0-imap php8.0-apcu cron -
 RUN apt-get clean
 RUN crontab -l | { cat; echo "*/2 * * * * php /var/www/html/api/cron.php > /dev/null 2>&1"; } | crontab -
 RUN rm -rf /var/lib/apt/lists/* 
-RUN echo "**** Downloading Invoice Ninja ****"
+RUN echo "**** Downloading osTicket ****"
 RUN if [ -z ${OSTICKET_RELEASE+x} ]; then \
       OSTICKET_RELEASE=$(curl -sX GET "https://api.github.com/repos/osticket/osticket/releases/latest" | \
       awk '/tag_name/{print $4;exit}' FS='[""]'); \
